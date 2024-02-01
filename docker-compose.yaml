@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+
+  nginx-proxy:
+    image: nginx
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web
+      - api
+
+  web:
+    image: securenotes/web:latest
+    build:
+      context: ./web-app
+
+  api:
+    image: securenotes/api:latest
+    build:
+      context: ./api
+
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    container_name: surrealdb
+    command: start --log debug

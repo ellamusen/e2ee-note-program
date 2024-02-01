@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    container_name: surrealdb
+    ports:
+      - 8000:8000
+    command: start --log debug
